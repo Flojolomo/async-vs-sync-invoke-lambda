@@ -13,12 +13,21 @@ The definition of a webhook is as follows
 
 To show case, the setup, following steps are taken
 
-- Create API Gateway
-- Create a Lambda function waiting 5 seconds and resolving
-- Create a Lambda function waiting 3 seconds and rejecting
-- Attach the lambda functions to
+- Create API Gateway :white_check_mark:
+- Create a Lambda function waiting 5 seconds and resolving :white_check_mark:
+- Create a Lambda function waiting 3 seconds and rejecting :white_check_mark:
+- Attach the lambda functions to :white_check_mark:
   - `POST /async/resolve` & `POST /async/reject`
   - `POST /sync/resolve` & `POST sync/reject`
-- Create 4 lambda functions invoking the API, one for each method
+- ~~Create 4 lambda functions invoking the API, one for each method~~ Create function to generate webhook
 - Optional: Pack in VPC
 - Provide a cost estimation
+
+https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html
+https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_apigatewayv2.HttpApi.html
+
+## Notes
+
+- Supported for REST API only?
+- `curl -X POST https://6dqljh52v5.execute-api.eu-west-1.amazonaws.com/prod/generate-webhook -H "Content-Type: application/json" --data '{"path": "/sync/resolve"}'  
+{"message":"Webhook sent to /sync/resolve"}`
