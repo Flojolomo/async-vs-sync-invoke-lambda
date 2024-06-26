@@ -17,9 +17,6 @@ export class AsyncVsSyncInvokeLambdaStack extends cdk.Stack {
       entry: "functions/resolve.ts",
       logRetention: logs.RetentionDays.ONE_DAY,
       timeout: cdk.Duration.seconds(10),
-      environment: {
-        API_GATEWAY_URL: restApi.deploymentStage.urlForPath("/"),
-      },
     });
 
     const reject = new lambdaNodeJs.NodejsFunction(this, "reject", {
@@ -42,6 +39,11 @@ export class AsyncVsSyncInvokeLambdaStack extends cdk.Stack {
         logRetention: logs.RetentionDays.ONE_DAY,
         timeout: cdk.Duration.seconds(10),
       }
+    );
+
+    generateWebhook.addEnvironment(
+      "API_GATEWAY_URL",
+      restApi.deploymentStage.urlForPath("/")
     );
 
     restApi.root.addResource("generate-webhook").addMethod(
@@ -76,6 +78,11 @@ export class AsyncVsSyncInvokeLambdaStack extends cdk.Stack {
         allowTestInvoke: true,
       })
     );
+
+    new cdk.CfnOutput(this, "webhook-endpoint", {
+      value: restApi.deploymentStage.urlForPath("/generate-webhook"),
+      description: "Webhook endpoint",
+    });
   }
 
   private addAsyncLambdaInvokation(
