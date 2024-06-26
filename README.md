@@ -24,7 +24,7 @@ To show case, the setup, following steps are taken
 - Provide a cost estimation
 
 https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html
-https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_apigatewayv2.HttpApi.html
+https://www.artillery.io/docs/reference/test-script#using-time-units-for-duration-and-pause
 
 ## Notes
 

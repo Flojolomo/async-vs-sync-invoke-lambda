@@ -1,0 +1,57 @@
+config:
+  # This is a test server run by team Artillery
+  # It's designed to be highly scalable
+  target: https://6dqljh52v5.execute-api.eu-west-1.amazonaws.com/prod
+  phases:
+    - duration: 10
+      arrivalRate: 1
+      rampTo: 5
+      name: Warm up phase
+    - duration: 30
+      arrivalRate: 5
+      rampTo: 10
+      name: Ramp up load
+    - duration: 60
+      arrivalRate: 10
+      rampTo: 30
+      name: Spike phase
+  # Load & configure a couple of useful plugins
+  # https://docs.art/reference/extensions
+  plugins:
+    ensure: {}
+    apdex: {}
+    metrics-by-endpoint: {}
+  apdex:
+  ensure:
+scenarios:
+  - name: events
+    flow: 
+      - post:
+          url: '/generate-webhook'
+          json:
+            path: 'async/resolve'
+      - post:
+          url: '/generate-webhook'
+          json:
+            path: 'async/reject'
+      - post:
+          url: '/generate-webhook'
+          json:
+            path: 'async/reject-catch'
+    count: 50
+
+  - name: wait
+    flow: 
+      - post:
+            url: '/generate-webhook'
+            json:
+              path: 'sync/resolve'
+      - post:
+            url: '/generate-webhook'
+            json:
+              path: 'sync/reject'
+      - post:
+            url: '/generate-webhook'
+            json:
+              path: 'sync/reject-catch'
+    count: 50
