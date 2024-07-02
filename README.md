@@ -31,3 +31,4 @@ https://www.artillery.io/docs/reference/test-script#using-time-units-for-duratio
 - Supported for REST API only?
 - `curl -X POST https://6dqljh52v5.execute-api.eu-west-1.amazonaws.com/prod/generate-webhook -H "Content-Type: application/json" --data '{"path": "/sync/resolve"}'  
 {"message":"Webhook sent to /sync/resolve"}`
+- TODO custom metric to measure duration from beginning to end

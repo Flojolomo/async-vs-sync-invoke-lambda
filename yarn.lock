@@ -175,7 +175,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-cloudwatch@npm:^3.370.0":
+"@aws-sdk/client-cloudwatch@npm:^3.370.0, @aws-sdk/client-cloudwatch@npm:^3.600.0":
   version: 3.600.0
   resolution: "@aws-sdk/client-cloudwatch@npm:3.600.0"
   dependencies:
@@ -3998,6 +3998,7 @@ __metadata:
   resolution: "async-vs-sync-invoke-lambda@workspace:."
   dependencies:
     "@aws-lambda-powertools/logger": "npm:^2.2.0"
+    "@aws-sdk/client-cloudwatch": "npm:^3.600.0"
     "@types/aws-lambda": "npm:^8.10.140"
     "@types/jest": "npm:^29.5.12"
     "@types/node": "npm:20.14.2"
